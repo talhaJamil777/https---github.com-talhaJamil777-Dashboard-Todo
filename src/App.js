@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import Home from "./components/home";
+import "./components/style.css";
+import { SectionContext } from "./components/SectionContext";
 
 function App() {
+  const [sections, setSections] = useState([]);
+
+  useEffect(() => {
+    const savedSections = JSON.parse(localStorage.getItem("sections")) || [];
+    setSections(savedSections);
+  }, []);
+
+  const addSection = (name) => {
+    if (name && !sections.includes(name)) {
+      const updated = [...sections, name];
+      setSections(updated);
+      localStorage.setItem("sections", JSON.stringify(updated));
+    }
+  };
+
+  const deleteSection = (index) => {
+    const updated = sections.filter((_, i) => i !== index);
+    setSections(updated);
+    localStorage.setItem("sections", JSON.stringify(updated));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <SectionContext.Provider value={{ sections, addSection, deleteSection }}>
+      <Home />
+    </SectionContext.Provider>
   );
 }
 
