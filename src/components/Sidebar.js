@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import {SectionContext } from "./SectionContext";
+import {SectionContext } from "./components/SectionContext";
 
 const Sidebar = ({ onSelectSection }) => {
   const { sections, addSection, deleteSection } = useContext(SectionContext);

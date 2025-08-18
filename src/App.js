@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Home from "./components/home";
 import "./components/style.css";
-import { SectionContext } from "./components/SectionContext";
+import { SectionContext } from "./SectionContext";
 
 function App() {
   const [sections, setSections] = useState([]);
@@ -25,10 +25,15 @@ function App() {
     localStorage.setItem("sections", JSON.stringify(updated));
   };
 
+// Todo List code 
+  
+
+
   return (
     <SectionContext.Provider value={{ sections, addSection, deleteSection }}>
       <Home />
     </SectionContext.Provider>
+    
   );
 }
 
