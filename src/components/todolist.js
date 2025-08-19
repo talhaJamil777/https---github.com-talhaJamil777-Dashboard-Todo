@@ -1,24 +1,13 @@
 import React, { useContext } from "react";
-import { TodoContext, CheckedContext } from "./TodoContext.js";
+import { TodoContext } from "./TodoContext";
 
-const TodoItem = ({ text, index }) => {
+const TodoItem = ({ text, index, section }) => {
   const { deleteTodo } = useContext(TodoContext);
-  const { checked, toggleCheck } = useContext(CheckedContext);
 
   return (
     <li className="todo-item">
-      <span>
-        <input
-          type="checkbox"
-          checked={checked[index] || false}
-          onChange={() => toggleCheck(index)}
-        />
-        <p className="todo-item-text">{text}</p>
-      </span>
-      <button
-        onClick={() => deleteTodo(index)}
-        className="btn btn-danger col-2 btn"
-      >
+      <span>{text}</span>
+      <button onClick={() => deleteTodo(index, section)} className="btn btn-danger">
         Delete
       </button>
     </li>

@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
-import {SectionContext } from "./components/SectionContext";
+import { SectionContext } from "./SectionContext";
 
 const Sidebar = ({ onSelectSection }) => {
   const { sections, addSection, deleteSection } = useContext(SectionContext);
 
   const SectionAdd = () => {
     const name = prompt("Enter new section name:");
-    addSection(name);
+    if (name && name.trim() !== "") {
+      addSection(name.trim());
+    }
   };
 
   return (
@@ -17,7 +19,6 @@ const Sidebar = ({ onSelectSection }) => {
         padding: "10px",
         display: "flex",
         flexDirection: "column",
-        
       }}
     >
       <h3 style={{ color: "#FFFFFF" }}>Sections</h3>
@@ -36,6 +37,7 @@ const Sidebar = ({ onSelectSection }) => {
           >
             {section}
           </button>
+
           <button
             style={{
               marginLeft: "5px",
@@ -47,7 +49,7 @@ const Sidebar = ({ onSelectSection }) => {
             }}
             onClick={() => deleteSection(index)}
           >
-            &#x2716; 
+            &#x2716;
           </button>
         </div>
       ))}

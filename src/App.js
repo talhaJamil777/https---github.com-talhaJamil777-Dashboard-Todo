@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Home from "./components/home";
 import "./components/style.css";
-import { SectionContext } from "./SectionContext";
+import { SectionContext } from "./components/SectionContext";
 
 function App() {
   const [sections, setSections] = useState([]);
@@ -25,7 +25,6 @@ function App() {
     localStorage.setItem("sections", JSON.stringify(updated));
   };
 
-// Todo List code 
   
 
 
