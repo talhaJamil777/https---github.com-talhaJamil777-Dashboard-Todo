@@ -1,14 +1,26 @@
 import React, { useContext } from "react";
 import { SectionContext } from "./SectionContext";
+import { TodoContext } from "./TodoContext"; 
 
 const Sidebar = ({ onSelectSection }) => {
   const { sections, addSection, deleteSection } = useContext(SectionContext);
+  const { todos, setTodos } = useContext(TodoContext); 
 
   const SectionAdd = () => {
     const name = prompt("Enter new section name:");
     if (name && name.trim() !== "") {
       addSection(name.trim());
     }
+  };
+
+  const handleDelete = (index, sectionName) => {
+    deleteSection(index);
+
+    const updatedTodos = { ...todos };
+    delete updatedTodos[sectionName];
+    setTodos(updatedTodos);
+
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
   };
 
   return (
@@ -47,7 +59,7 @@ const Sidebar = ({ onSelectSection }) => {
               border: "none",
               cursor: "pointer",
             }}
-            onClick={() => deleteSection(index)}
+            onClick={() => handleDelete(index, section)}
           >
             &#x2716;
           </button>
